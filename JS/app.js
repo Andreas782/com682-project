@@ -61,8 +61,8 @@ $.ajax({
     contentType: false, 
     processData: false, 
     type: 'POST', 
-    success: function(data){ 
-       
+    success: function(){ 
+       console.log('SUCCESS')
     } 
 });
 
