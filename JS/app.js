@@ -13,7 +13,6 @@ UIVURI2 = "?api-version=2016-10-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=aXPO
 BLOB_ACCOUNT = "https://videostoragecom682.blob.core.windows.net";
 
 var updateID;
-let auth0Client = null;
 
 //Handlers for button clicks
 $(document).ready(function() {
