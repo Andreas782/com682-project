@@ -146,7 +146,6 @@ function updateVideo(id){
   //Get form variables and append them to the form data object 
 
   updateData.append('Title', $('#updateTitle').val());
-  // updateData.append('userID', $('#userID').val()); 
   updateData.append('Producer', $('#updateProducer').val()); 
   updateData.append('Publisher', $('#updatePublisher').val());
   updateData.append('Genre', $('#updateGenre').val());
