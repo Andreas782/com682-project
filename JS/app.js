@@ -12,11 +12,12 @@ UIVURI2 = "?api-version=2016-10-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=aXPO
 
 BLOB_ACCOUNT = "https://videostoragecom682.blob.core.windows.net";
 
-var id;
+var updateID;
 
 //Handlers for button clicks
 $(document).ready(function() {
  
+ $("#updateForm").hide();
   $("#retVideos").click(function(){
 
     //Run the get videos function
@@ -29,11 +30,10 @@ $(document).ready(function() {
 
     //Execute the submit new asset function
     submitNewAsset();
-    
   });
 
   $("#updateVideo").click(function(){
-    updateVideo(id);
+    updateVideo(updateID);
   });
 
 });
@@ -63,8 +63,10 @@ $.ajax({
     processData: false, 
     type: 'POST', 
     success: function(){ 
-       console.log('SUCCESS')
+       console.log('SUCCESS');
+       $("#newVideoForm")[0].reset();
     } 
+
 });
 
 }
@@ -85,7 +87,7 @@ function getVideos(){
           items.push( "Age Rating : " + val["AgeRating"] + "<br>"); 
           items.push( ' <video controls> <source src="'+BLOB_ACCOUNT+val.filePath+'" type="video/mp4" /></video> ');
           items.push( '<button type="button" id="delVids" class="btn btn-danger" onclick=deleteVideo("'+val.id+'")>Delete</button> ');
-          items.push( '<button id="showUpdateVideo" type="button" class="btn btn-secondary" onclick=showUpdateForm("'+val.id+'")>Update Video</button> <br><br>');
+          items.push( '<button id="showUpdateForm" type="button" class="btn btn-secondary" onclick=showUpdateForm("'+val.id+'");getID("'+val.id+'")>Update Video</button> <br><br>');
           items.push( '<div id="vid-info" onclick=getVideo("'+val.id+'")><p>More Info</p></div> ');
           items.push("<hr />")
         });
@@ -134,10 +136,13 @@ $("<ul/>", {
 });
 
 }
-function showUpdateForm(id){
+function showUpdateForm(){
   $('#newVideoForm').toggle(); 
   $('#updateForm').toggle();
-  return id;
+}
+function getID(id){
+  updateID = id
+  return updateID;
 }
 
 function updateVideo(id){
@@ -150,7 +155,6 @@ function updateVideo(id){
   updateData.append('Publisher', $('#updatePublisher').val());
   updateData.append('Genre', $('#updateGenre').val());
   updateData.append('AgeRating', $('#updateAgeRating').val());
-  updateData.append('File', $('#updateUpFile')[0].files[0]); 
    
   $.ajax({
     url: UIVURI1 + id + UIVURI2,
@@ -161,7 +165,7 @@ function updateVideo(id){
     contentType: false, 
     processData: false,
     success: function (msg) {
-
+      $("#updateForm")[0].reset();
     }
   });
 }
