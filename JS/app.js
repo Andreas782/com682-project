@@ -30,10 +30,8 @@ $(document).ready(function() {
     submitNewAsset();
     
   });
-  
-  $("#updateVideo").click(function(){
 
-    //Execute the update function
+  $("#updateVideo").click(function(){
     updateVideo();
   });
 
@@ -86,7 +84,9 @@ function getVideos(){
           items.push( "Age Rating : " + val["AgeRating"] + "<br>"); 
           items.push( ' <video controls> <source src="'+BLOB_ACCOUNT+val.filePath+'" type="video/mp4" /></video> ');
           items.push( '<button type="button" id="delVids" class="btn btn-danger" onclick=deleteVideo("'+val.id+'")>Delete</button> ');
+          items.push( '<button id="updateVideo" type="button" class="btn btn-secondary" onclick=showUpdateForm("'+val.id+'")>Update Video</button> <br><br>');
           items.push( '<div id="vid-info" onclick=getVideo("'+val.id+'")><p>More Info</p></div> ');
+
           items.push("<hr />")
         });
      
@@ -134,15 +134,21 @@ $("<ul/>", {
 });
 
 }
-function updateVideo(id){
+function showUpdateForm(id){
+
   $('#newVideoForm').hide();
   $('#updateForm').show();
-  
+
+  return id;
+}
+
+function updateVideo(id){
+
   updateData = new FormData(); 
- 
   //Get form variables and append them to the form data object 
+  
   updateData.append('Title', $('#Title').val());
-  updateData.append('userID', $('#userID').val()); 
+  // updateData.append('userID', $('#userID').val()); 
   updateData.append('Producer', $('#Producer').val()); 
   updateData.append('Publisher', $('#Publisher').val());
   updateData.append('Genre', $('#Genre').val());
