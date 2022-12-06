@@ -135,6 +135,9 @@ $("<ul/>", {
 
 }
 function updateVideo(id){
+  $('#newVideoForm').hide();
+  $('#updateForm').show();
+  
   updateData = new FormData(); 
  
   //Get form variables and append them to the form data object 
@@ -162,14 +165,7 @@ function updateVideo(id){
 
 function search(){
   
-  var items, input, searchedItems;
+  var input;
   input = document.getElementById('search-bar');
 
-  //Loop through the data from get Videos
-  for(i=0; i<items.length; i++){
-    a = items[i];
-  if (!a.toUpperCase().inclues(input))
-    searchedItems.append(a);
   }
-    $("<ul/>")
-}

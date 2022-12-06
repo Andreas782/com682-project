@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8">
 
-    <title>Asset Track</title>
+    <title>Videos</title>
 
       <link rel="stylesheet" type="text/css" href="CSS/bootstrap.min.css">
       <script src="JS/bootstrap.js"></script>
@@ -43,7 +43,7 @@
             <div class="col-8" style="text-align: left;border-bottom:1px solid #222222;">
               <p>Add Video</p>
 
-              <form style="font-size: 10pt;" id="newAssetForm">
+              <form style="font-size: 10pt;" id="newVideoForm">
                 <div class="mb-3">
                   <label for="Title" class="form-label">Video Title</label>
                   <input type="text" class="form-control" id="Title">
@@ -52,6 +52,41 @@
                 <div class="mb-3">
                   <label for="userID" class="form-label">user ID</label>
                   <input type="integer" class="form-control" id="userID">
+                </div>
+
+                <div class="mb-3">
+                  <label for="Producer" class="form-label">Producer</label>
+                  <input type="text" class="form-control" id="Producer">
+                </div>
+
+                <div class="mb-3">
+                  <label for="Publisher" class="form-label">Publisher</label>
+                  <input type="text" class="form-control" id="Publisher">
+                </div>
+
+                <div class="mb-3">
+                  <label for="Genre" class="form-label">Genre</label>
+                  <input type="text" class="form-control" id="Genre">
+                </div>
+
+                <div class="mb-3">
+                  <label for="AgeRating" class="form-label">Age Rating</label>
+                  <input type="text" class="form-control" id="AgeRating">
+                </div>
+                
+                <div class="mb-3">
+                  <label for="UpFile" class="form-label">File to Upload</label>
+                  <input type="file" class="form-control" id="UpFile">
+                </div>
+            
+                <button type="button" id="subNewForm" class="btn btn-primary">Submit</button> 
+                <button id="updateVideo" type="button" class="btn btn-secondary">Update Video</button> <br><br>
+              </form>
+
+              <form style="font-size: 10pt;" id="updateForm" style="display: none;">
+                <div class="mb-3">
+                  <label for="Title" class="form-label">Video Title</label>
+                  <input type="text" class="form-control" id="Title">
                 </div>
 
                 <div class="mb-3">
