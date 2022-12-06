@@ -3,19 +3,28 @@
       "rewrite": "/index.html",
       "exclude": ["*.{css,scss,js,png,gif,ico,jpg,svg}"]
     },
-    "routes": [
-        {
-            "route": "/.auth/login/aad",
-            "statusCode": "404"
-        },
-        {
-            "route": "/login",
-            "redirect": "/.auth/login/aad"
-        },
-        {
-            "route": "/logout",
-            "redirect": "/.auth/logout"
+
+    "auth": {
+            "identityProviders": {
+                "customOpenIdConnectProviders": {
+                        "auth0": {
+                            "registration": {
+                                "clientIdSettingName": "AUTH0_ID",
+                                "clientCredential": {
+                                    "clientSecretSettingName": "AUTH0_SECRET"
+                                },
+                                    "openIdConnectConfiguration": {
+                                        "wellKnownOpenIdConfiguration": "https://dev-t2ukgvgl.us.auth0.com/.well-known/openid-configuration"
+                                    
+                                }
+                            },
+                            "login": {
+                                "nameClaimType": "name",
+                                "scopes": ["openid", "profile"]
+                            }
+                        }
+                }
+            }
         }
-    ]
-  }
+}    
   
