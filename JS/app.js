@@ -146,14 +146,14 @@ function updateVideo(id){
 
   updateData = new FormData(); 
   //Get form variables and append them to the form data object 
-  
-  updateData.append('Title', $('#Title').val());
+
+  updateData.append('Title', $('#updateTitle').val());
   // updateData.append('userID', $('#userID').val()); 
-  updateData.append('Producer', $('#Producer').val()); 
-  updateData.append('Publisher', $('#Publisher').val());
-  updateData.append('Genre', $('#Genre').val());
-  updateData.append('AgeRating', $('#AgeRating').val());
-  updateData.append('File', $('#UpFile')[0].files[0]); 
+  updateData.append('Producer', $('#updateProducer').val()); 
+  updateData.append('Publisher', $('#updatePublisher').val());
+  updateData.append('Genre', $('#updateGenre').val());
+  updateData.append('AgeRating', $('#updateAgeRating').val());
+  updateData.append('File', $('#updateUpFile')[0].files[0]); 
    
   $.ajax({
     url: UIVURI1 + id + UIVURI2,
