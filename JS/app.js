@@ -12,9 +12,10 @@ UIVURI2 = "?api-version=2016-10-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=aXPO
 
 BLOB_ACCOUNT = "https://videostoragecom682.blob.core.windows.net";
 
+var id;
+
 //Handlers for button clicks
 $(document).ready(function() {
-
  
   $("#retVideos").click(function(){
 
@@ -32,7 +33,7 @@ $(document).ready(function() {
   });
 
   $("#updateVideo").click(function(){
-    updateVideo();
+    updateVideo(id);
   });
 
 });
@@ -84,9 +85,8 @@ function getVideos(){
           items.push( "Age Rating : " + val["AgeRating"] + "<br>"); 
           items.push( ' <video controls> <source src="'+BLOB_ACCOUNT+val.filePath+'" type="video/mp4" /></video> ');
           items.push( '<button type="button" id="delVids" class="btn btn-danger" onclick=deleteVideo("'+val.id+'")>Delete</button> ');
-          items.push( '<button id="updateVideo" type="button" class="btn btn-secondary" onclick=showUpdateForm("'+val.id+'")>Update Video</button> <br><br>');
+          items.push( '<button id="showUpdateVideo" type="button" class="btn btn-secondary" onclick=showUpdateForm("'+val.id+'")>Update Video</button> <br><br>');
           items.push( '<div id="vid-info" onclick=getVideo("'+val.id+'")><p>More Info</p></div> ');
-
           items.push("<hr />")
         });
      
@@ -135,10 +135,8 @@ $("<ul/>", {
 
 }
 function showUpdateForm(id){
-
-  $('#newVideoForm').hide();
-  $('#updateForm').show();
-
+  $('#newVideoForm').toggle(); 
+  $('#updateForm').toggle();
   return id;
 }
 
