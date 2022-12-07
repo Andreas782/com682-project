@@ -1,3 +1,5 @@
+import {login} from 'aut0-js';
+
 //The URIs of the REST endpoint
 CIV = "https://prod-00.centralus.logic.azure.com:443/workflows/a4eed56a3a8d48daacc5eff8b30b1985/triggers/manual/paths/invoke?api-version=2016-10-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=rG5WIFGai54YeNbq-WRND2jaxlBTJDlg_Ki7sOF42fM";
 RAV = "https://prod-30.centralus.logic.azure.com:443/workflows/ae2121fe8ec14ecc82891dc96144928a/triggers/manual/paths/invoke?api-version=2016-10-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=1KCWfrBSrmdtjztug3Ru-MbHo9VqPkNFE66IUvYmg18";
@@ -13,6 +15,11 @@ UIVURI2 = "?api-version=2016-10-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=aXPO
 BLOB_ACCOUNT = "https://videostoragecom682.blob.core.windows.net";
 
 var updateID;
+const auth0 = new auth0.webAuth({
+  domain: 'dev-t2ukgvgl.us.auth0.com',
+  clientID: 'rusPvh3ksL5fiTnvsglVTPe583RoGq0d'
+});
+
 
 //Handlers for button clicks
 $(document).ready(function() {
@@ -175,3 +182,12 @@ function search(){
   input = document.getElementById('search-bar');
 
   }
+
+  function authenticate() {
+    auth0.login({
+      redirecturi: 'https://calm-bay-02a03b403.2.azurestaticapps.net/.auth/login/auth0/callback',
+      responseType: 'token id_token',
+      scope: 'openid profile email'
+    });
+  }
+  
