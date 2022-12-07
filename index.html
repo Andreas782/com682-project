@@ -15,7 +15,7 @@
   
   <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-      <button class ="btn btn-primary" id="btn-login" disabled="true" onclick="authenticate()">Log in</button>
+      <button class ="btn btn-primary" id="btn-login" disabled="true" onclick="login()">Log in</button>
       <button class ="btn btn-primary" id="btn-logout" disabled="true" onclick="logout()">Log out</button>
     </div>
     </nav>
@@ -37,7 +37,7 @@
         <div class="row align-items-start">
             <div class="col-2"  ></div>
 
-            <div id="gated-content" class="col-8" style="text-align: left;border-bottom:1px solid #222222;" display="hidden">
+            <div hidden id="gated-content" class="col-8" style="text-align: left;border-bottom:1px solid #222222;">
               <p>Video Form</p>
 
               <form style="font-size: 10pt;" id="newVideoForm">
