@@ -12,6 +12,17 @@
         "route": "/.auth/login/aad/callback",
         "rewrite": "/"
       }
-    ]
+    ],
+    "auth": {
+      "identityProviders": {
+        "azureActiveDirectory": {
+        "registration": {
+          "openIdIssuer": "https://login.microsoftonline.com/bbcf450a-6e68-4e6f-b2c2-8fa05b5b8f36/v2.0",
+          "clientIdSettingName": "AAD_CLIENT_ID",
+          "clientSecretSettingName": "AAD_CLIENT_SECRET"
+        }
+        }
+      }
+      }
   }
   
