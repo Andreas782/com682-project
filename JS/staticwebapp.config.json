@@ -7,6 +7,10 @@
       {
         "route": "/logout",
         "rewrite": "/.auth/logout"
+      },
+      {
+        "route": "/.auth/login/aad/callback",
+        "rewrite": "/"
       }
     ]
   }
