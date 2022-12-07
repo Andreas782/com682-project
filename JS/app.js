@@ -217,7 +217,7 @@ function search(){
   
   const login = async () => {
     await auth0.loginWithRedirect({
-      redirect_uri: 'https://calm-bay-02a03b403.2.azurestaticapps.net',
+      redirect_uri: 'https://calm-bay-02a03b403.2.azurestaticapps.net/.auth/login/auth0/callback',
     })
   }
   
