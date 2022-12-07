@@ -25,14 +25,6 @@ const auth0 = new auth0.webAuth({
 $(document).ready(function() {
  $("#updateForm").hide();
 
- $("#btn-login").click(function(){
-  authenticate();
- });
-
- $("#btn-logout").click(function(){
-  logout();
- });
-
   $("#retVideos").click(function(){
 
     //Run the get videos function
