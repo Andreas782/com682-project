@@ -7,6 +7,7 @@
 
       <link rel="stylesheet" type="text/css" href="CSS/bootstrap.min.css">
       <script src="JS/bootstrap.js"></script>
+      <script src="https://cdn.auth0.com/js/auth0-spa-js/1.2/auth0-spa-js.production.js"></script>
       <script src="JS/bootstrap.bundle.min.js"></script>
       <script src="JS/jquery-3.6.0.min.js"></script>
       <script src="JS/app.js"></script>
@@ -14,8 +15,8 @@
   
   <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-      <button class ="btn btn-primary" id="btn-login" onclick="authenticate()">Log in</button>
-      <button class ="btn btn-primary" id="btn-logout" onclick="logout()">Log out</button>
+      <button class ="btn btn-primary" id="btn-login" disabled="true" onclick="authenticate()">Log in</button>
+      <button class ="btn btn-primary" id="btn-logout" disabled="true" onclick="logout()">Log out</button>
     </div>
     </nav>
     
@@ -36,7 +37,7 @@
         <div class="row align-items-start">
             <div class="col-2"  ></div>
 
-            <div class="col-8" style="text-align: left;border-bottom:1px solid #222222;">
+            <div id="gated-content" class="col-8" style="text-align: left;border-bottom:1px solid #222222;" display="hidden">
               <p>Video Form</p>
 
               <form style="font-size: 10pt;" id="newVideoForm">
@@ -78,7 +79,7 @@
                 <button type="button" id="subNewForm" class="btn btn-primary">Submit</button> 
               </form>
 
-              <form style="font-size: 10pt;" id="updateForm" >
+              <form style="font-size: 10pt;" id="updateForm" display="hidden" >
                 <div class="mb-3">
                   <label for="updateTitle" class="form-label">Video Title</label>
                   <input type="text" class="form-control" id="updateTitle">

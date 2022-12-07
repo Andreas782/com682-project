@@ -1,5 +1,3 @@
-import {login, logout} from 'aut0-js';
-
 //The URIs of the REST endpoint
 CIV = "https://prod-00.centralus.logic.azure.com:443/workflows/a4eed56a3a8d48daacc5eff8b30b1985/triggers/manual/paths/invoke?api-version=2016-10-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=rG5WIFGai54YeNbq-WRND2jaxlBTJDlg_Ki7sOF42fM";
 RAV = "https://prod-30.centralus.logic.azure.com:443/workflows/ae2121fe8ec14ecc82891dc96144928a/triggers/manual/paths/invoke?api-version=2016-10-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=1KCWfrBSrmdtjztug3Ru-MbHo9VqPkNFE66IUvYmg18";
@@ -15,10 +13,7 @@ UIVURI2 = "?api-version=2016-10-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=aXPO
 BLOB_ACCOUNT = "https://videostoragecom682.blob.core.windows.net";
 
 var updateID;
-const auth0 = new auth0.webAuth({
-  domain: 'dev-t2ukgvgl.us.auth0.com',
-  clientID: 'rusPvh3ksL5fiTnvsglVTPe583RoGq0d'
-});
+let auth0 = null
 
 
 //Handlers for button clicks
@@ -44,6 +39,19 @@ $(document).ready(function() {
   });
 
 });
+
+window.onload = async () => {
+  await configureClient()
+  await processLoginState()
+  updateUI()
+}
+
+const configureClient = async () => {
+  auth0 = await createAuth0Client({
+    domain: 'dev-t2ukgvgl.us.auth0.com',
+    client_id: 'rusPvh3ksL5fiTnvsglVTPe583RoGq0d',
+  })
+}
 
 //A function to submit a new asset to the REST endpoint 
 function submitNewAsset(){
@@ -184,17 +192,37 @@ function search(){
 
   }
 
-  function authenticate() {
-    auth0.login({
-      redirecturi: 'https://calm-bay-02a03b403.2.azurestaticapps.net/.auth/login/auth0/callback',
-      responseType: 'token id_token',
-      scope: 'openid profile email'
-    });
-  }
-  function logout() {
-    auth0.logout({
-    returnTo: 'https://calm-bay-02a03b403.2.azurestaticapps.net/.auth/logout/auth0/callback',
-    clientID: 'rusPvh3ksL5fiTnvsglVTPe583RoGq0d'
-    });
+  const processLoginState = async () => {
+    // Check code and state parameters
+    const query = window.location.search
+    if (query.includes("code=") && query.includes("state=")) {
+      // Process the login state
+      await auth0.handleRedirectCallback()
+      // Use replaceState to redirect the user away and remove the querystring parameters
+      window.history.replaceState({}, document.title, window.location.pathname)
+    }
   }
   
+  const updateUI = async () => {
+    const isAuthenticated = await auth0.isAuthenticated()
+    document.getElementById("btn-logout").disabled = !isAuthenticated
+    document.getElementById("btn-login").disabled = isAuthenticated
+    // NEW - add logic to show/hide gated content after authentication
+    if (isAuthenticated) {
+      document.getElementById("gated-content").classList.remove("hidden")
+    } else {
+      document.getElementById("gated-content").classList.add("hidden")
+    }
+  }
+  
+  const login = async () => {
+    await auth0.loginWithRedirect({
+      redirect_uri: 'https://calm-bay-02a03b403.2.azurestaticapps.net/.auth/login/auth0/callback',
+    })
+  }
+  
+  const logout = () => {
+    auth0.logout({
+      returnTo: 'https://calm-bay-02a03b403.2.azurestaticapps.net/.auth/logout/auth0/callback',
+    })
+  }
