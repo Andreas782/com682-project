@@ -13,20 +13,6 @@ UIVURI2 = "?api-version=2016-10-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=aXPO
 BLOB_ACCOUNT = "https://videostoragecom682.blob.core.windows.net";
 
 var updateID;
-let auth0Client = null
-
-const fetchAuthConfig = () => fetch("/auth_config.json");
-
-const configureClient = async () => {
-  const response = await fetchAuthConfig();
-  const config = await response.json();
-
-  auth0Client = await auth0.createAuth0Client({
-    domain: config.domain,
-    clientId: config.clientId
-  });
-};
-
 
 //Handlers for button clicks
 $(document).ready(function() {
@@ -196,37 +182,4 @@ function search(){
   var input;
   input = document.getElementById('search-bar');
 
-  }
-
-  const isAuthenticated = await auth0.isAuthenticated()
-    document.getElementById("btn-logout").disabled = !isAuthenticated
-    document.getElementById("btn-login").disabled = isAuthenticated
-    // NEW - add logic to show/hide gated content after authentication
-    if (isAuthenticated) {
-      document.getElementById("gated-content").classList.remove("hidden")
-    } else {
-      document.getElementById("gated-content").classList.add("hidden")
-    const query = window.location.search;
-    if (query.includes("code=") && query.includes("state=")) {
-      // Process the login state
-      await auth0.handleRedirectCallback()
-      // Use replaceState to redirect the user away and remove the querystring parameters
-      window.history.replaceState({}, document.title, "/")
-    }
-  };
-
-  const login = async () => {
-    await auth0Client.loginWithRedirect({
-      authorizationParams:{
-      redirect_uri: window.location.origin
-      }
-    });
-  }
-  
-  const logout = () => {
-    auth0Client.logout({
-      logoutParams:{
-      returnTo: window.location.origin
-      }
-    });
   }
