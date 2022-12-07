@@ -1,8 +1,14 @@
 {
-    "navigationFallback": {
-      "rewrite": "/index.html",
-      "exclude": ["*.{css,scss,js,png,gif,ico,jpg,svg}"]
-    },
+    "routes":[
+      {
+        "route": "/login",
+        "rewrite": "/.auth/login/aadb2c"
+      },
+      {
+        "route": "/logout",
+        "rewrite": "/.auth/logout"
+      }
+    ],
       "auth": {
         "identityProviders": {
           "customOpenIdConnectProviders": {
