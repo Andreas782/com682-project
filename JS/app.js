@@ -41,9 +41,9 @@ $(document).ready(function() {
 });
 
 window.onload = async () => {
-  await configureClient()
-  await processLoginState()
-  updateUI()
+  await configureClient();
+  await processLoginState();
+  updateUI();
 }
 
 const configureClient = async () => {
@@ -194,12 +194,12 @@ function search(){
 
   const processLoginState = async () => {
     // Check code and state parameters
-    const query = window.location.search
+    const query = window.location.search;
     if (query.includes("code=") && query.includes("state=")) {
       // Process the login state
       await auth0.handleRedirectCallback()
       // Use replaceState to redirect the user away and remove the querystring parameters
-      window.history.replaceState({}, document.title, window.location.pathname)
+      window.history.replaceState({}, document.title, "/")
     }
   }
   
@@ -217,12 +217,16 @@ function search(){
   
   const login = async () => {
     await auth0.loginWithRedirect({
-      redirect_uri: 'https://calm-bay-02a03b403.2.azurestaticapps.net/.auth/login/auth0/callback',
-    })
+      authorizationParams:{
+      redirect_uri: window.location.origin
+      }
+    });
   }
   
   const logout = () => {
     auth0.logout({
-      returnTo: 'https://calm-bay-02a03b403.2.azurestaticapps.net/.auth/logout/auth0/callback',
-    })
+      logoutParams:{
+      returnTo: window.location.origin
+      }
+    });
   }
