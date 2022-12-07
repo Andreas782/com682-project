@@ -1,4 +1,4 @@
-import {login} from 'aut0-js';
+import {login, logout} from 'aut0-js';
 
 //The URIs of the REST endpoint
 CIV = "https://prod-00.centralus.logic.azure.com:443/workflows/a4eed56a3a8d48daacc5eff8b30b1985/triggers/manual/paths/invoke?api-version=2016-10-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=rG5WIFGai54YeNbq-WRND2jaxlBTJDlg_Ki7sOF42fM";
@@ -24,6 +24,15 @@ const auth0 = new auth0.webAuth({
 //Handlers for button clicks
 $(document).ready(function() {
  $("#updateForm").hide();
+
+ $("#btn-login").click(function(){
+  authenticate();
+ });
+
+ $("#btn-logout").click(function(){
+  logout();
+ });
+
   $("#retVideos").click(function(){
 
     //Run the get videos function
@@ -188,6 +197,12 @@ function search(){
       redirecturi: 'https://calm-bay-02a03b403.2.azurestaticapps.net/.auth/login/auth0/callback',
       responseType: 'token id_token',
       scope: 'openid profile email'
+    });
+  }
+  function logout() {
+    auth0.logout({
+    returnTo: 'https://calm-bay-02a03b403.2.azurestaticapps.net/.auth/logout/auth0/callback',
+    clientID: 'rusPvh3ksL5fiTnvsglVTPe583RoGq0d'
     });
   }
   
