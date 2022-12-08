@@ -19,6 +19,8 @@ let auth0Client = null;
 //Handlers for button clicks
 $(document).ready(function() {
  $("#updateForm").hide();
+ $("#btn-login").click(login);
+ $("#btn-logout").click(logout);
 
   $("#retVideos").click(function(){
 
@@ -192,6 +194,7 @@ function search(){
       clientId: config.clientId
     });
   };
+
   const login = async () => {
     await auth0Client.loginWithRedirect({
       authorizationParams: {
