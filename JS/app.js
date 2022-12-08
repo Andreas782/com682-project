@@ -38,12 +38,6 @@ $(document).ready(function() {
 
 });
 
-window.onload = async () => {
-  await configureClient();
-  await processLoginState();
-  updateUI();
-}
-
 
 //A function to submit a new asset to the REST endpoint 
 function submitNewAsset(){

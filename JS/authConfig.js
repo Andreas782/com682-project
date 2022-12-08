@@ -1,8 +1,8 @@
 const msalConfig = {
     auth: {
-      clientId: "Enter_the_Application_Id_Here",
-      authority: "Enter_the_Cloud_Instance_Id_Here/Enter_the_Tenant_Info_Here",
-      redirectUri: "Enter_the_Redirect_Uri_Here",
+      clientId: "a5b52a24-d704-4dd5-8ab3-81cd1dd0853b",
+      authority: "bbcf450a-6e68-4e6f-b2c2-8fa05b5b8f36",
+      redirectUri: "https://polite-pebble-0fcec7503.2.azurestaticapps.net/app/msalCallback.html",
     },
     cache: {
       cacheLocation: "sessionStorage", // This configures where your cache will be stored
