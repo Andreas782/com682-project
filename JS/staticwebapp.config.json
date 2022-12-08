@@ -1,4 +1,7 @@
 {
+    "navigationFallback": {
+      "rewrite": "/index.html"
+    },
     "routes":[
       {
         "route": "/login",
@@ -9,8 +12,8 @@
         "rewrite": "/.auth/logout"
       },
       {
-        "route": "/.auth/login/aad/callback",
-        "rewrite": "/"
+        "route": "index.html",
+        "allowedRoles": ["authenticated"]
       }
     ],
     "auth": {
@@ -18,9 +21,14 @@
         "azureActiveDirectory": {
           "userDetailsClaim": "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name",
         "registration": {
-          "openIdIssuer": "https://login.microsoftonline.com/bbcf450a-6e68-4e6f-b2c2-8fa05b5b8f36/v2.0",
+          "openIdIssuer": "https://login.microsoftonline.com/bbcf450a-6e68-4e6f-b2c2-8fa05b5b8f36",
           "clientIdSettingName": "AAD_CLIENT_ID",
           "clientSecretSettingName": "AAD_CLIENT_SECRET"
+        },
+        "login": {
+          "loginParameters": [
+            "resource=https://graph.microsoft.com"
+          ]
         }
         }
       }
