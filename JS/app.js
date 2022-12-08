@@ -1,3 +1,5 @@
+import { createAuth0Client } from '@auth0/auth0-spa-js';
+
 //The URIs of the REST endpoint
 CIV = "https://prod-00.centralus.logic.azure.com:443/workflows/a4eed56a3a8d48daacc5eff8b30b1985/triggers/manual/paths/invoke?api-version=2016-10-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=rG5WIFGai54YeNbq-WRND2jaxlBTJDlg_Ki7sOF42fM";
 RAV = "https://prod-30.centralus.logic.azure.com:443/workflows/ae2121fe8ec14ecc82891dc96144928a/triggers/manual/paths/invoke?api-version=2016-10-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=1KCWfrBSrmdtjztug3Ru-MbHo9VqPkNFE66IUvYmg18";
@@ -13,7 +15,7 @@ UIVURI2 = "?api-version=2016-10-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=aXPO
 BLOB_ACCOUNT = "https://videostoragecom682.blob.core.windows.net";
 
 var updateID;
-
+let auth0Client = null;
 //Handlers for button clicks
 $(document).ready(function() {
  $("#updateForm").hide();
@@ -177,3 +179,31 @@ function search(){
   input = document.getElementById('search-bar');
 
   }
+  window.onload = async () => {
+    await configureClient();
+  }
+  const fetchAuthConfig = () => fetch("/auth_config.json");
+  const configureClient = async () => {
+    const response = await fetchAuthConfig();
+    const config = await response.json();
+  
+    auth0Client = await auth0.createAuth0Client({
+      domain: config.domain,
+      clientId: config.clientId
+    });
+  };
+  const login = async () => {
+    await auth0Client.loginWithRedirect({
+      authorizationParams: {
+        redirect_uri: window.location.origin
+      }
+    });
+  };
+
+  const logout = () => {
+    auth0Client.logout({
+      logoutParams: {
+        returnTo: window.location.origin
+      }
+    });
+  };

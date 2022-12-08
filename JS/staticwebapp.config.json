@@ -1,16 +1,25 @@
-{
-    "navigationFallback": {
-      "rewrite": "/index.html"
-    },
-    "routes":[
-      {
-        "route": "/login",
-        "rewrite": "/.auth/login/aad"
-      },
-      {
-        "route": "/logout",
-        "rewrite": "/.auth/logout"
+{    
+      "auth": {
+          "identityProviders": {
+              "customOpenIdConnectProviders": {
+                "auth0": {
+                  "registration": {
+                      "clientIdSettingName": "AUTH0_ID",
+                      "clientCredential": {
+                          "clientSecretSettingName": "AUTH0_SECRET"
+                      },
+                      "openIdConnectConfiguration": {
+                          "wellKnownOpenIdConfiguration": "https://aaronpowell.au.auth0.com/.well-known/openid-configuration"
+                      }
+                  },
+                  "login": {
+                    "nameClaimType": "http://dev-t2ukgvgl.us.auth0.com/ws/2005/05/identity/claims/name",
+                    "scopes": ["openid", "profile"]
+                }
+              }
+          }
+              
+          }  
       }
-    ]
+
   }
-  
