@@ -89,7 +89,7 @@ function getVideos(){
           items.push( ' <video controls> <source src="'+BLOB_ACCOUNT+val.filePath+'" type="video/mp4" /></video> ');
           items.push( '<button type="button" id="delVids" class="btn btn-danger" onclick=deleteVideo("'+val.id+'")>Delete</button> ');
           items.push( '<button id="showUpdateForm" type="button" class="btn btn-secondary" onclick=showUpdateForm("'+val.id+'");getID("'+val.id+'")>Update Video</button> <br><br>');
-          items.push( '<div id="vid-info" onclick=getVideo("'+val.id+'")><p>More Info</p></div> ');
+          items.push( '<div id="vid-info-"'+val.id+'" onclick=getVideo("'+val.id+'")><p>More Info</p></div> ');
           items.push("<hr />")
         });
      
@@ -120,8 +120,8 @@ function deleteVideo(id){
 
     //A function to get the video of a file with a specific ID.
 function getVideo(id){
-$('#VideoInfo').html('<div id="infoDiv" class="spinner-borde smalldesc" role="status"><span class="sr-only">&nbsp;</span>');
-
+$('#vid-info').html('<div id="infoDiv" class="spinner-borde smalldesc" role="status"><span class="sr-only">&nbsp;</span>');
+var a = "#vid-info-"+id+""
 $.getJSON(RIVURI1 + id + RIVURI2, function( data ) {
 
   var info = [];
@@ -133,7 +133,7 @@ $.getJSON(RIVURI1 + id + RIVURI2, function( data ) {
 $("<ul/>", {
   "class":"vid-info",
   html: info.join(""),
-}).appendTo("#vid-info")
+}).appendTo(a)
 });
 
 }
