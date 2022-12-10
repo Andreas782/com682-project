@@ -12,8 +12,6 @@ UIVURI2 = "?api-version=2016-10-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=aXPO
 
 BLOB_ACCOUNT = "https://videostoragecom682.blob.core.windows.net";
 
-var updateID;
-
 //Handlers for button clicks
 $(document).ready(function() {
  $("#updateForm").hide();
@@ -120,36 +118,14 @@ function deleteVideo(id){
   });
 }
 
-    //A function to get the video of a file with a specific ID.
-function getVideo(id){
-$('#vid-info').html('<div id="infoDiv" class="spinner-borde smalldesc" role="status"><span class="sr-only">&nbsp;</span>');
-var a = "#vid-info-"+id+""
-$.getJSON(RIVURI1 + id + RIVURI2, function( data ) {
-
-  var info = [];
-  info.push( "Publisher: " + data.Publisher + "<br>");
-  info.push( "Producer: " + data.Producer + " <br>");
-  info.push( "Genre: " + data.Genre+ "<br>"); 
-  info.push( "userID: " + data.userID+ "<br>");
-
-$("<ul/>", {
-  "class":"vid-info",
-  html: info.join(""),
-}).appendTo(a)
-});
-
-}
 function showUpdateForm(){
   $('#newVideoForm').toggle(); 
   $('#updateForm').toggle();
 }
-function getID(id){
-  updateID = id
-  return updateID;
-}
 
+ 
 function updateVideo(id){
-
+  var id = sessionStorage.getItem('id', updateID)
   updateData = new FormData(); 
   //Get form variables and append them to the form data object 
 
@@ -172,33 +148,14 @@ function updateVideo(id){
     }
   });
 }
-
-function search(){
-  
-  var input;
-  input = document.getElementById('search-bar');
-
-  }
  
   function login() {
-    const usernameInput = document.querySelector('#username-input');
-    const passwordInput = document.querySelector('#password-input');
+    window.location.href = "login.html";
+  }
+
+  function logout() {
+    alert('You have logged out')
+    window.location.href = "login.html";
     
-    const username = usernameInput.value;
-    const password = passwordInput.value;
     
-    const request = new XMLHttpRequest();
-    request.method = 'POST';
-    request.url = 'https://example.com/login';
-    
-    request.setRequestHeader('Content-Type', 'application/json');
-    const data = JSON.stringify({ username, password });
-    request.send(data);
-    request.onload = () => {
-      if (request.status === 200) {
-        window.location.href = 'https://example.com/dashboard';
-      } else {
-        console.log("error")
-      }
-    };
-  }  
+  }

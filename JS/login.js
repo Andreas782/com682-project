@@ -11,31 +11,28 @@ $("#signUp").click(function(){
 $("#signUp-button").click(function(){
     signUp();
 });
+
 $("#login-form-button").click(function(){
     login();
 });
 
 });
 
-const loginForm = document.getElementById("login-form");
-const loginErrorMsg = document.getElementById("login-error-msg");
-
 function login(){
-    $.getJSON(loginURI, function(data){
-    const email = loginForm.Email.value;
-    const password = loginForm.password.value;
+    var email = $('#email-field').val();
+    var password = $('#password-field').val();
     if (email === "andreas@email.com" && password === "password") {
-        window.location.href = "index.html"
-        localStorage.setItem('token', 'auth-token')
+        window.location.href = "index.html";
+        sessionStorage.setItem('token', 'auth-token')
         alert("You have successfully logged in.")
     }
     if (email === "user@email.com" && password === "password") {
-        alert("You have successfully logged in.");
+        alert("You have successfully logged in.")
         window.location.href = "dashboard.html";
-    }   else {
-            loginErrorMsg.style.opacity = 1;
+    }   
+    if (email != "user@email.com" && email != "andreas@email.com"){
+        alert("You have entered invalid user info")
     }
-    })
 }
 
 function signUp(){
