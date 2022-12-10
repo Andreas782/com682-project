@@ -108,7 +108,6 @@ function getVideos(){
     //A function to delete an video with a specific ID.
 //The id paramater is provided to the function as defined in the relevant on click handler
 function deleteVideo(id){
-
   $.ajax({
 
     url: DIVURI1 + id + DIVURI2,

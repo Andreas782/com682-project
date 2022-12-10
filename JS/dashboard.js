@@ -11,6 +11,11 @@ var updateID;
 //Handlers for page load
 $(document).ready(function(){
 getVideos();
+
+$('#comment').on('input', ':text', function(){
+  comment();
+})
+
 });
 
 
@@ -124,6 +129,7 @@ $("<ul/>", {
 function comment(){
 
 }
+
 function rate(){
 
 
