@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login</title>
+  <link rel="stylesheet" href="CSS/login.css">
+  <script src="JS/jquery-3.6.0.min.js"></script>
+  <script src="JS/login.js"></script>
+</head>
+
+<body>
+  <main id="main-holder">
+    <h1 id="login-header">Login</h1>
+    
+    <div id="login-error-msg-holder">
+      <p id="login-error-msg">Invalid username <span id="error-msg-second-line">and/or password</span></p>
+    </div>
+    
+    <form id="login-form">
+      <input type="text" name="Email" id="email-field" class="login-form-field" placeholder="Email">
+      <input type="password" name="password" id="password-field" class="login-form-field" placeholder="Password">
+      <input type="submit" value="Login" id="login-form-submit">
+      <button type="button" id="signUp">Sign up</button>
+    </form>
+  
+    <form id="signUp-form">
+      <label for="FirstName">FirstName:</label><br>
+      <input type="text" name="FirstName" id="FirstName" class="signUp-form-field" placeholder="First name"><br>
+      <label for="LastName">LastName:</label><br>
+      <input type="text" name="LastName" id="LastName" class="signUp-form-field" placeholder="Last name"><br>
+      <label for="password">Password:</label><br>
+      <input type="password" name="password" id="password" class="signUp-form-field" placeholder="Password"><br>
+      <label for="Email">Email address:</label><br>
+      <input type="email" name="Email" id="Email" class="signUp-form-field" placeholder="Email"><br><br>
+      <button type="button" id="signUp-button">Sign up</button>
+    </form>
+    
+  </main>
+</body>
+
+</html>

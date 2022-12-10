@@ -5,6 +5,7 @@ RIVURI2 = "?api-version=2016-10-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=ep9D
 
 BLOB_ACCOUNT = "https://videostoragecom682.blob.core.windows.net";
 
+var updateID;
 
 //Handlers for button clicks
 $(document).ready(function() {
@@ -40,8 +41,11 @@ function getVideos(){
           items.push( "Title: " + val["Title"] + "<br>");
           items.push( "Age Rating : " + val["AgeRating"] + "<br>"); 
           items.push( ' <video controls> <source src="'+BLOB_ACCOUNT+val.filePath+'" type="video/mp4" /></video> ');
-          items.push( '<button type="button" id="delVids" class="btn btn-danger" onclick=deleteVideo("'+val.id+'")>Delete</button> ');
-          items.push( '<button id="showUpdateForm" type="button" class="btn btn-secondary" onclick=showUpdateForm("'+val.id+'");getID("'+val.id+'")>Update Video</button> <br><br>');
+          if (localStorage.getItem('token') == 'auth-token') (
+            items.push( '<button type="button" id="delVids" class="btn btn-danger" onclick=deleteVideo("'+val.id+'")>Delete</button> '),
+            items.push( '<button id="showUpdateForm" type="button" class="btn btn-secondary" onclick=getID("'+val.id+'")>Update Video</button> <br><br>'));
+          items.push( '<input type="text" name="comment" id="comment" placeholder="Add comment">' );
+          items.push( '<input type="integer" name="rating" id="rating" placeholder="Add rating">' );
           items.push( '<div id="vid-info-"'+val.id+'" onclick=getVideo("'+val.id+'")><p>More Info</p></div> ');
           items.push("<hr />")
         });
@@ -56,4 +60,18 @@ function getVideos(){
         html: items.join( "" )
       }).appendTo( "#VideoList" ); 
        }); 
+}
+
+function getID(id){
+  updateID = id;
+  return updateID;
+}
+
+function comment(){
+
+}
+
+function rate(){
+
+
 }
