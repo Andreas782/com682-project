@@ -28,13 +28,13 @@ function login(){
         window.location.href = "index.html"
         localStorage.setItem('token', 'auth-token')
         alert("You have successfully logged in.")
+    }
     if (email === "user@email.com" && password === "password") {
         alert("You have successfully logged in.");
         window.location.href = "dashboard.html";
     }   else {
             loginErrorMsg.style.opacity = 1;
     }
-}
     })
 }
 
