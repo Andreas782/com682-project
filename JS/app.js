@@ -113,6 +113,6 @@ function updateVideo(id){
   function logout() {
     alert('You have logged out')
     window.location.href = "login.html";
-    
-    
+    sessionStorage.removeItem('auth');
+    sessionStorage.removeItem('userID')
   }

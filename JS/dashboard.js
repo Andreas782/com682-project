@@ -21,6 +21,15 @@ $('#clear-button').click(function(){
   clearSearch();
 })
 
+$('#btn-login').click(function(){
+  window.location.href = "login.html"
+})
+
+$('#btn-logout').click(function(){
+  window.location.href = "login.html"
+  sessionStorage.removeItem('auth');
+  sessionStorage.removeItem('userID');
+})
 });
 
 function search(){
@@ -147,3 +156,4 @@ $.ajax({
   }
 });
 }
+
