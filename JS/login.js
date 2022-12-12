@@ -19,29 +19,42 @@ $("#login-form-button").click(function(){
 });
 
 function login(){
-    var email = $('#email-field').val();
-    var password = $('#password-field').val();
-    if (email === "andreas@email.com" && password === "password") {
-        window.location.href = "index.html";
-        sessionStorage.setItem('token', 'auth-token')
-        alert("You have successfully logged in.")
+    var email = document.getElementById("email-field").value;
+    var password = document.getElementById("password-field").value;
+
+        if (email === "andreas@email.com" && password === "password") {
+            window.location.href = "index.html";
+            sessionStorage.setItem('token', 'auth-token')
+            sessionStorage.setItem('userID', '2')
+            alert("You have successfully logged in.")
+        }
+        if (email === "user@email.com" && password === "password"){
+            window.location.href = "dashboard";
+            sessionStorage.setItem('userID', '3')
+            alert("You have successfully logged in.")
+        }
     }
-    if (email === "user@email.com" && password === "password") {
-        alert("You have successfully logged in.")
-        window.location.href = "dashboard.html";
-    }   
-    if (email != "user@email.com" && email != "andreas@email.com"){
-        alert("You have entered invalid user info")
-    }
-}
 
 function signUp(){
+ var password = $('#password').val();
+    const crypto = require('crypto');
+
+// Generate a random salt
+const salt = crypto.randomBytes(16).toString('hex');
+
+// Hash the password and the salt using the SHA-256 algorithm
+const hash = crypto.createHmac('sha256', salt)
+                   .update(password)
+                   .digest('hex');
+
     signUpData = new FormData(); 
  
 //Get form variables and append them to the form data object 
 signUpData.append('FirstName', $('#FirstName').val());
 signUpData.append('LastName', $('#LastName').val()); 
 signUpData.append('Email', $('#Email').val()); 
+signUpData.append('salt', salt);
+signUpData.append('hash', hash);
 
 $.ajax({
     url: CIU,

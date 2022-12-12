@@ -36,18 +36,21 @@ $(document).ready(function() {
     updateVideo(updateID);
   });
 
+  $('#showUpdateForm').click(function(){
+    showUpdateForm();
+  })
 });
 
 
 //A function to submit a new asset to the REST endpoint 
 function submitNewAsset(){
-
+var userID = sessionStorage.getItem('userID')
 //Create a form data object 
 submitData = new FormData(); 
  
 //Get form variables and append them to the form data object 
 submitData.append('Title', $('#Title').val());
-submitData.append('userID', $('#userID').val()); 
+submitData.append('userID', userID); 
 submitData.append('Producer', $('#Producer').val()); 
 submitData.append('Publisher', $('#Publisher').val());
 submitData.append('Genre', $('#Genre').val());
@@ -70,51 +73,6 @@ $.ajax({
 
 });
 
-}
-
-//A function to get a list of all the assets and write them to the Div with the VideoList Div
-function getVideos(){
-  //Replace the current HTML in that div with a loading message 
-  $('#VideoList').html('<div id="videoDiv" class="spinner-border" role="status"><span class="sr-only">&nbsp;</span>'); 
- 
-  $.getJSON(RAV, function( data ) { 
- 
-    //Create an array to hold all the retrieved videos 
-    var items = []; 
-    //Iterate through the returned records and build HTML, incorporating the key values of the record in the data 
-      $.each( data, function( key, val ) { 
-          items.push("<hr />");
-          items.push( "Title: " + val["Title"] + "<br>");
-          items.push( "Age Rating : " + val["AgeRating"] + "<br>"); 
-          items.push( ' <video controls> <source src="'+BLOB_ACCOUNT+val.filePath+'" type="video/mp4" /></video> ');
-          items.push( '<button type="button" id="delVids" class="btn btn-danger" onclick=deleteVideo("'+val.id+'")>Delete</button> ');
-          items.push( '<button id="showUpdateForm" type="button" class="btn btn-secondary" onclick=showUpdateForm("'+val.id+'");getID("'+val.id+'")>Update Video</button> <br><br>');
-          items.push( '<div id="vid-info-"'+val.id+'" onclick=getVideo("'+val.id+'")><p>More Info</p></div> ');
-          items.push("<hr />")
-        });
-     
-      //Clear the videolist div  
-      $('#VideoList').empty(); 
-        
-      //Append the contents of the items array to the VideoList Div 
-      $( "<ul/>", { 
-        "class": "my-new-list",
-        "id": "my-new-list",
-        html: items.join( "" )
-      }).appendTo( "#VideoList" ); 
-       }); 
-}
-
-    //A function to delete an video with a specific ID.
-//The id paramater is provided to the function as defined in the relevant on click handler
-function deleteVideo(id){
-  $.ajax({
-
-    url: DIVURI1 + id + DIVURI2,
-    type: 'DELETE',
-    success: function (msg){
-    }
-  });
 }
 
 function showUpdateForm(){
