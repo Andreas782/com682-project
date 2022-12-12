@@ -33,7 +33,7 @@ $(document).ready(function() {
   });
 
   $("#updateVideo").click(function(){
-    updateVideo(updateID);
+    updateVideo();
   });
 
   $('#showUpdateForm').click(function(){
