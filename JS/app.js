@@ -81,8 +81,8 @@ function showUpdateForm(){
 }
 
  
-function updateVideo(id){
-  var id = sessionStorage.getItem('id', updateID)
+function updateVideo(){
+  var id = sessionStorage.getItem('updateID');
   updateData = new FormData(); 
   //Get form variables and append them to the form data object 
 
