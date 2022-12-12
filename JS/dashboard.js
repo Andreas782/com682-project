@@ -10,8 +10,6 @@ CURI = "https://prod-06.centralus.logic.azure.com:443/workflows/010e29ee37534493
 
 BLOB_ACCOUNT = "https://videostoragecom682.blob.core.windows.net";
 
-var updateID;
-
 //Handlers for page load
 $(document).ready(function(){
 getVideos();
